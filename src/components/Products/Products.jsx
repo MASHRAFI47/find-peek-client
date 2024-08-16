@@ -4,6 +4,9 @@
 // import { useEffect, useState } from "react";
 import { useState } from "react";
 import useProducts from "../../hooks/useProducts";
+import { format } from "date-fns";
+import moment from "moment/moment";
+
 
 const Products = () => {
 
@@ -74,8 +77,8 @@ const Products = () => {
                                 <div>
                                     <p><span className="font-semibold">Brand:</span> {product?.brand}</p>
                                     <p><span className="font-semibold">Category:</span> {product?.category}</p>
-                                    <p><span className="font-semibold">Added On:</span> {product?.time}</p>
-                                    <p><span className="font-semibold">Creation Time:</span> {product?.time}</p>
+                                    <p><span className="font-semibold">Created On:</span> {format(new Date(product?.time), 'MM/dd/yyyy')}</p>
+                                    <p><span className="font-semibold">Time:</span> {moment(product?.time).format('LLL')}</p>
                                 </div>
                                 <div className="card-actions justify-end">
                                     <button className="btn btn-primary">Buy Now</button>
