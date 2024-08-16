@@ -4,7 +4,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const { signInUser } = useContext(AuthContext);
+    const { signInUser, googleSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -16,6 +16,15 @@ const Login = () => {
                 navigate("/")
             })
     }
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(res => {
+                navigate("/");
+                console.log(res.user);
+            })
+    }
+
     return (
         <div className='min-h-screen flex flex-col items-center justify-center'>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 border">
@@ -41,10 +50,11 @@ const Login = () => {
                     <div className="form-control mt-6">
                         <button className="btn btn-primary">Login</button>
                     </div>
-                    <div className="form-control">
-                        <button className="btn btn-accent">Google</button>
-                    </div>
+
                 </form>
+                <div className="form-control">
+                    <button className="btn btn-accent mx-8 mb-6" onClick={handleGoogleSignIn}>Google</button>
+                </div>
             </div>
         </div>
     )
