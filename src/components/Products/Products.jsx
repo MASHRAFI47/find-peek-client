@@ -2,10 +2,11 @@
 // import useAxiosCommon from "../../hooks/useAxiosCommon"
 // import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 // import { useEffect, useState } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useProducts from "../../hooks/useProducts";
 import { format } from "date-fns";
 import moment from "moment/moment";
+import axios from "axios";
 
 
 const Products = () => {
@@ -14,30 +15,43 @@ const Products = () => {
     const [search, setSearch] = useState('');
     const [category, setCategory] = useState('');
 
+    const [myProducts, setMyProducts] = useState([]);
+
     const products = useProducts(asc, search, category);
 
-    // const axiosCommon = useAxiosCommon();
+
+    //pagination state
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(3);
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const getData = async () => {
+            const { data } = await axios(`${import.meta.env.VITE_api_url}/products-data?page=${currentPage}&size=${itemsPerPage}`)
+            setMyProducts(data);
+        }
+        getData()
+    }, [currentPage, itemsPerPage]);
 
 
-    /////////****TANSTACK */
-    // const { data: products = [], isLoading } = useQuery({
-    //     queryKey: ['products'],
-    //     queryFn: async () => {
-    //         const { data } = await axiosCommon.get('/products');
-    //         return data
-    //     }
-    // })
+    useEffect(() => {
+        const getProductsCount = async () => {
+            const { data } = await axios(`${import.meta.env.VITE_api_url}/products-count`);
+            setCount(data.count)
+        }
+        getProductsCount()
+    }, []);
 
-    // const [productsData, setProductsData] = useState(products);
+    console.log(count)
 
-
-    // useEffect(() => {
-    //     axiosCommon.get(`/products?search=${search}&sort=${asc ? "asc" : "desc"}`)
-    // }, [search, asc]);
-
-    // if (isLoading) return <LoadingSpinner />
+    //pagination
+    const numberOfPages = Math.ceil(count / itemsPerPage);
+    const pages = [...Array(numberOfPages).keys()].map(element => element + 1);
 
 
+    const handlePaginationButton = (value) => {
+        setCurrentPage(value);
+    }
 
     const handleSearch = e => {
         e.preventDefault();
@@ -45,7 +59,6 @@ const Products = () => {
         setSearch(searchValue);
     }
 
-    console.log(search)
 
     return (
         <div>
@@ -85,7 +98,7 @@ const Products = () => {
 
             <div className="container mx-auto grid grid-cols-4 gap-8">
                 {
-                    products?.map(product => <div key={product._id}>
+                    myProducts?.map(product => <div key={product._id}>
                         <div className="card bg-base-100 border shadow-xl">
                             <figure>
                                 <img className="w-64"
@@ -111,6 +124,17 @@ const Products = () => {
                         </div>
                     </div>)
                 }
+            </div>
+
+
+            <div className="flex justify-center gap-4 my-10">
+                <button className="btn" disabled={currentPage == 1} onClick={() => handlePaginationButton(currentPage - 1)}>--Prev</button>
+                {
+                    pages?.map((btnNum, index) => <div key={index}>
+                        <button className={`btn ${currentPage === btnNum ? "bg-blue-400" : ""}`} onClick={() => handlePaginationButton(btnNum)}>{btnNum}</button>
+                    </div>)
+                }
+                <button className="btn" disabled={currentPage == numberOfPages} onClick={() => handlePaginationButton(currentPage + 1)}>Next--</button>
             </div>
         </div>
     )
