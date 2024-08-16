@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { signInUser, googleSignIn } = useContext(AuthContext);
@@ -55,6 +55,8 @@ const Login = () => {
                 <div className="form-control">
                     <button className="btn btn-accent mx-8 mb-6" onClick={handleGoogleSignIn}>Google</button>
                 </div>
+
+                <p className="text-center mb-10">New user? <Link to={'/register'} className="font-bold hover:text-red-600">Register Now</Link></p>
             </div>
         </div>
     )
