@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import logo from '../../assets/images/findpeek.png';
 
 const Header = () => {
     const links = <>
@@ -26,10 +27,12 @@ const Header = () => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                           {links}
+                            {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">FindPeek</a>
+                    <a className="text-xl" href="/">
+                        <img src={logo} width={80} alt="" />
+                    </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
