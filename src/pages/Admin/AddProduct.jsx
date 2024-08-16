@@ -15,7 +15,7 @@ const AddProduct = () => {
         const picture = await imageUpload(displayImage);
         console.log(picture)
 
-        mutateAsync({ productName, productImage: picture, description, price, category, brand, rating, time: Date.now() });
+        mutateAsync({ productName, productImage: picture, description, price: Number(price), category, brand, rating: Number(rating), time: Date.now() });
     };
 
     const { mutateAsync } = useMutation({
