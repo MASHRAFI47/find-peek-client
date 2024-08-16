@@ -84,6 +84,8 @@ const AddProduct = () => {
                             <option disabled>Select Category</option>
                             <option>Monitor</option>
                             <option>Casing</option>
+                            <option>Headphone</option>
+                            <option>Motherboard</option>
                         </select>
                         {errors.category && <span className="text-red-600">This field is required</span>}
                     </div>

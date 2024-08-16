@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react"
 
-const useProducts = (asc) => {
+const useProducts = (asc, search) => {
     const [products, setProducts] = useState([]);
-    console.log(asc)
     
     useEffect(() => {
-        fetch(`http://localhost:3000/products?sort=${asc ? 'asc' : 'desc'}`)
+        fetch(`http://localhost:3000/products?sort=${asc ? 'asc' : 'desc'}&search=${search}`)
             .then(res => res.json())
             .then(data => setProducts(data));
-    }, [asc]);
+    }, [asc, search]);
 
     return products;
 }

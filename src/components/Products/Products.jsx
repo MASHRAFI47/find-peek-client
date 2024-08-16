@@ -10,7 +10,7 @@ const Products = () => {
     const [asc, setAsc] = useState(true);
     const [search, setSearch] = useState('');
 
-    const products = useProducts(asc);
+    const products = useProducts(asc, search);
 
     // const axiosCommon = useAxiosCommon();
 
@@ -71,8 +71,12 @@ const Products = () => {
                                     <div className="badge badge-warning">${product?.price}</div>
                                 </h2>
                                 <p>{product?.description.slice(0, 60).concat("...")}</p>
-                                <p><span className="font-semibold">Brand:</span> {product?.brand}</p>
-                                <p><span className="font-semibold">Category:</span> {product?.category}</p>
+                                <div>
+                                    <p><span className="font-semibold">Brand:</span> {product?.brand}</p>
+                                    <p><span className="font-semibold">Category:</span> {product?.category}</p>
+                                    <p><span className="font-semibold">Added On:</span> {product?.time}</p>
+                                    <p><span className="font-semibold">Creation Time:</span> {product?.time}</p>
+                                </div>
                                 <div className="card-actions justify-end">
                                     <button className="btn btn-primary">Buy Now</button>
                                 </div>
