@@ -4,10 +4,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
     </>
+
     return (
         <div className='container mx-auto'>
             <div className="navbar bg-base-100">
@@ -67,7 +68,7 @@ const Header = () => {
                                         </a>
                                     </li>
                                     <li><a>Settings</a></li>
-                                    <li><a>Logout</a></li>
+                                    <li onClick={() => logOut()}><a>Logout</a></li>
                                 </ul>
                             </div>
                             :
