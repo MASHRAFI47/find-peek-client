@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import useAxiosCommon from "../../hooks/useAxiosCommon"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const Home = () => {
     const axiosCommon = useAxiosCommon();
@@ -11,6 +12,8 @@ const Home = () => {
             return data
         }
     })
+
+    if(isLoading) return <LoadingSpinner />
 
     console.log(products)
     return (
