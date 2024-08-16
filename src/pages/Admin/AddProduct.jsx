@@ -8,14 +8,14 @@ const AddProduct = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async data => {
-        const { productName, productImage } = data
+        const { productName, productImage, description, price, category, rating } = data
 
         //image
         const displayImage = productImage[0];
         const picture = await imageUpload(displayImage);
         console.log(picture)
 
-        mutateAsync({ productName, productImage: picture });
+        mutateAsync({ productName, productImage: picture, description, price, category, rating, time: Date.now() });
     };
 
     const { mutateAsync } = useMutation({
@@ -30,7 +30,7 @@ const AddProduct = () => {
 
     return (
         <div>
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border mx-auto">
                 <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control">
                         <label className="label">
@@ -66,7 +66,7 @@ const AddProduct = () => {
 
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Product Name*</span>
+                            <span className="label-text">Category*</span>
                         </label>
                         <select className="select select-bordered w-full max-w-xs" {...register("category", { required: true })}>
                             <option disabled>Select Category</option>
@@ -76,9 +76,24 @@ const AddProduct = () => {
                         {errors.category && <span className="text-red-600">This field is required</span>}
                     </div>
 
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Rating*</span>
+                        </label>
+                        <select className="select select-bordered w-full max-w-xs" {...register("rating", { required: true })}>
+                            <option disabled>Select Category</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option selected>5</option>
+                        </select>
+                        {errors.rating && <span className="text-red-600">This field is required</span>}
+                    </div>
+
 
                     <div className="form-control mt-6">
-                        <button className="btn btn-primary">Add</button>
+                        <button className="btn btn-secondary">Add</button>
                     </div>
                 </form>
             </div>
