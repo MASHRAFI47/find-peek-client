@@ -60,7 +60,7 @@ const Products = () => {
                 </button>
             </div>
 
-            <div className="container mx-auto">
+            <div className="container mx-auto mb-3">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-warning m-1">Brand</div>
                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
