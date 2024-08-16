@@ -1,21 +1,21 @@
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
-import imageUpload from "../../hooks/imageUpload";
+import { imageUpload } from "../../hooks/imageUpload";
 
 const AddProduct = () => {
     const axiosCommon = useAxiosCommon();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async data => {
-        const { productName, productImage, description, price, category, rating } = data
+        const { productName, productImage, description, price, category, brand, rating } = data
 
         //image
         const displayImage = productImage[0];
         const picture = await imageUpload(displayImage);
         console.log(picture)
 
-        mutateAsync({ productName, productImage: picture, description, price, category, rating, time: Date.now() });
+        mutateAsync({ productName, productImage: picture, description, price, category, brand, rating, time: Date.now() });
     };
 
     const { mutateAsync } = useMutation({
@@ -66,12 +66,24 @@ const AddProduct = () => {
 
                     <div className="form-control">
                         <label className="label">
+                            <span className="label-text">Brand*</span>
+                        </label>
+                        <select className="select select-bordered w-full max-w-xs" {...register("brand", { required: true })}>
+                            <option disabled>Select Brand</option>
+                            <option>MSI</option>
+                            <option>Asus</option>
+                        </select>
+                        {errors.brand && <span className="text-red-600">This field is required</span>}
+                    </div>
+
+                    <div className="form-control">
+                        <label className="label">
                             <span className="label-text">Category*</span>
                         </label>
                         <select className="select select-bordered w-full max-w-xs" {...register("category", { required: true })}>
                             <option disabled>Select Category</option>
-                            <option>MSI</option>
-                            <option>Asus</option>
+                            <option>Monitor</option>
+                            <option>Casing</option>
                         </select>
                         {errors.category && <span className="text-red-600">This field is required</span>}
                     </div>

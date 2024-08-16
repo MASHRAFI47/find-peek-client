@@ -14,18 +14,18 @@ const Home = () => {
 
     console.log(products)
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto grid grid-cols-4 gap-8">
             {
                 products?.map(product => <div key={product._id}>
-                    <div className="card bg-base-100 w-96 shadow-xl">
+                    <div className="card bg-base-100 border shadow-xl">
                         <figure>
-                            <img
-                                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                            <img className="w-64"
+                                src={product?.productImage}
                                 alt="Shoes" />
                         </figure>
                         <div className="card-body">
-                            <h2 className="card-title">Shoes!</h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
+                            <h2 className="card-title">{product?.productName}</h2>
+                            <p>{product?.description.slice(0, 100).concat("...")}</p>
                             <div className="card-actions justify-end">
                                 <button className="btn btn-primary">Buy Now</button>
                             </div>
