@@ -3,6 +3,7 @@ import Home from '../pages/Home/Home';
 import Root from '../layout/Root';
 import AddProduct from '../pages/Admin/AddProduct';
 import Register from '../pages/Register/Register';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
     {
@@ -11,7 +12,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />
+                element: <PrivateRoute><Home /></PrivateRoute>
             },
             {
                 path: "/add-product",
