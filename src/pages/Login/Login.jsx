@@ -2,18 +2,18 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 
-const Register = () => {
-    const { createUser } = useContext(AuthContext)
+const Login = () => {
+    const { signInUser } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
         const { email, password } = data;
-        createUser(email, password)
-            .then(res => res.user);
+        signInUser(email, password)
+            .then(res => res.user)
     }
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center">
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 border mx-auto">
+        <div className='min-h-screen flex flex-col items-center justify-center'>
+            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                 <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control">
                         <label className="label">
@@ -33,7 +33,7 @@ const Register = () => {
                         </label>
                     </div>
                     <div className="form-control mt-6">
-                        <button className="btn btn-primary">Register</button>
+                        <button className="btn btn-primary">Login</button>
                     </div>
                 </form>
             </div>
@@ -41,4 +41,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Login
