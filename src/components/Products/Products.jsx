@@ -124,7 +124,7 @@ const Products = () => {
                         value={brand}
                     >
                         <option disabled selected>Sort By Brand</option>
-                        <option value={""}>All</option>
+                        <option value={""}>All (Brands)</option>
                         <option value={"MSI"}>MSI</option>
                         <option value={"Asus"}>Asus</option>
                         <option value={"Lenovo"}>Lenovo</option>
