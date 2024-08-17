@@ -163,12 +163,15 @@ const Products = () => {
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
                     myProducts?.map(product => <div key={product._id}>
-                        <div className="card bg-base-100 border shadow-xl">
+                        <div className="card bg-base-100 border shadow-xl relative">
                             <figure>
                                 <img className=""
                                     src={product?.productImage}
-                                    alt="Shoes" />
+                                    alt={product?.productName} />
                             </figure>
+                            <div>
+                                <p className="absolute top-6 right-5 bg-pink-600 w-24 rounded text-center text-white">Rating: {product?.rating}</p>
+                            </div>
                             <div className="card-body">
                                 <h2 className="card-title">
                                     {product?.productName}
