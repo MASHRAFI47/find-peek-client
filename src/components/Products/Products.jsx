@@ -3,7 +3,7 @@
 // import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 // import { useEffect, useState } from "react";
 import { useEffect, useState } from "react";
-import useProducts from "../../hooks/useProducts";
+// import useProducts from "../../hooks/useProducts";
 import { format } from "date-fns";
 import moment from "moment/moment";
 import axios from "axios";
@@ -42,8 +42,7 @@ const Products = () => {
     //max
     const [max, setMax] = useState("");
 
-    // eslint-disable-next-line no-unused-vars
-    const products = useProducts(asc, search, category, currentPage, itemsPerPage);
+    // const products = useProducts(asc, search, category, currentPage, itemsPerPage);
 
 
 
@@ -117,7 +116,7 @@ const Products = () => {
                     </ul>
                 </div> */}
 
-                <div className="flex flex-col md:flex-row gap-5">
+                <div className="grid grid-cols-3 md:grid-cols-5 gap-2 mx-4 md:mx-0">
                     <select className="select select-bordered w-full max-w-xs" onChange={e => {
                         setBrand(e.target.value)
                         setCurrentPage(1);
@@ -156,8 +155,8 @@ const Products = () => {
                     </select>
 
 
-                    <input type="text" placeholder="Type here" onChange={e => setMin(e.target.value)} className="input input-bordered w-full max-w-xs" />
-                    <input type="text" placeholder="Type here" onChange={e => setMax(e.target.value)} className="input input-bordered w-full max-w-xs" />
+                    <input type="text" placeholder="Min Price" onChange={e => setMin(e.target.value)} className="input input-bordered w-full max-w-xs" />
+                    <input type="text" placeholder="Max Price" onChange={e => setMax(e.target.value)} className="input input-bordered w-full max-w-xs" />
                 </div>
             </div>
 
@@ -192,14 +191,14 @@ const Products = () => {
             </div>
 
 
-            <div className="flex justify-center gap-4 my-10">
-                <button className="btn" disabled={currentPage == 1} onClick={() => handlePaginationButton(currentPage - 1)}>--Prev</button>
+            <div className="flex justify-center gap-2 my-10">
+                <button className="btn" disabled={currentPage == 1} onClick={() => handlePaginationButton(currentPage - 1)}>Prev</button>
                 {
                     pages?.map((btnNum, index) => <div key={index}>
                         <button className={`btn ${currentPage === btnNum ? "bg-blue-400" : ""}`} onClick={() => handlePaginationButton(btnNum)}>{btnNum}</button>
                     </div>)
                 }
-                <button className="btn" disabled={currentPage == numberOfPages} onClick={() => handlePaginationButton(currentPage + 1)}>Next--</button>
+                <button className="btn" disabled={currentPage == numberOfPages} onClick={() => handlePaginationButton(currentPage + 1)}>Next</button>
             </div>
         </div>
     )
