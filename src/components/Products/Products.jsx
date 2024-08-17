@@ -36,6 +36,12 @@ const Products = () => {
     //sort
     const [sort, setSort] = useState("");
 
+    //min
+    const [min, setMin] = useState("");
+
+    //max
+    const [max, setMax] = useState("");
+
     // eslint-disable-next-line no-unused-vars
     const products = useProducts(asc, search, category, currentPage, itemsPerPage);
 
@@ -43,11 +49,11 @@ const Products = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const { data } = await axios(`${import.meta.env.VITE_api_url}/products-data?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&sort=${sort}&search=${search}&brand=${brand}`)
+            const { data } = await axios(`${import.meta.env.VITE_api_url}/products-data?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&sort=${sort}&search=${search}&brand=${brand}&min=${min}&max=${max}`)
             setMyProducts(data);
         }
         getData()
-    }, [currentPage, itemsPerPage, filter, sort, search, brand]);
+    }, [currentPage, itemsPerPage, filter, sort, search, brand, min, max]);
 
 
     useEffect(() => {
@@ -148,6 +154,10 @@ const Products = () => {
                         <option value={"Laptop"}>Laptop</option>
                         <option value={"Mouse"}>Mouse</option>
                     </select>
+
+
+                    <input type="text" placeholder="Type here" onChange={e => setMin(e.target.value)} className="input input-bordered w-full max-w-xs" />
+                    <input type="text" placeholder="Type here" onChange={e => setMax(e.target.value)} className="input input-bordered w-full max-w-xs" />
                 </div>
             </div>
 
