@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import app from "../firebase/firebase.init";
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 
 
@@ -34,7 +35,11 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     }
 
-    const logOut = () => {
+    const logOut = async () => {
+        setLoading(true)
+        await axios.post(`https://find-peek-server.vercel.app/logout`, {
+            withCredentials: true
+        })
         return signOut(auth);
     }
 

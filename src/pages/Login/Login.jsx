@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
     const { signInUser, googleSignIn } = useContext(AuthContext);
@@ -11,9 +12,14 @@ const Login = () => {
         console.log(data)
         const { email, password } = data;
         signInUser(email, password)
-            .then((res) => {
-                console.log(res.user)
+            .then((result) => {
+                console.log(result.user)
                 navigate("/")
+                const user = { email }
+                axios.post('https://find-peek-server.vercel.app/jwt', user, {
+                    withCredentials: true
+                })
+                    .then(res => console.log(res.data))
             })
     }
 
