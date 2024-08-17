@@ -135,9 +135,9 @@ const Products = () => {
                         setSort(e.target.value);
                         setCurrentPage(1);
                     }} value={sort}>
-                        <option disabled selected>Sort By</option>
-                        <option value={"dsc"}>Sort By (Descending)</option>
-                        <option value={"asc"}>Sort By (Ascending)</option>
+                        <option disabled selected>Sort By Price</option>
+                        <option value={"dsc"}>Sort By Price(Descending)</option>
+                        <option value={"asc"}>Sort By Price(Ascending)</option>
                     </select>
 
                     <select className="select select-bordered w-full max-w-xs" onChange={e => {
