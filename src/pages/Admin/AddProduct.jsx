@@ -72,6 +72,7 @@ const AddProduct = () => {
                             <option disabled>Select Brand</option>
                             <option>MSI</option>
                             <option>Asus</option>
+                            <option>Lenovo</option>
                         </select>
                         {errors.brand && <span className="text-red-600">This field is required</span>}
                     </div>
@@ -86,6 +87,8 @@ const AddProduct = () => {
                             <option>Casing</option>
                             <option>Headphone</option>
                             <option>Motherboard</option>
+                            <option>Mouse</option>
+                            <option>Laptop</option>
                         </select>
                         {errors.category && <span className="text-red-600">This field is required</span>}
                     </div>

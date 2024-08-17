@@ -24,13 +24,13 @@ const Products = () => {
     //pagination state
     const [currentPage, setCurrentPage] = useState(1);
     // eslint-disable-next-line no-unused-vars
-    const [itemsPerPage, setItemsPerPage] = useState(2);
+    const [itemsPerPage, setItemsPerPage] = useState(8);
     const [count, setCount] = useState(0);
 
     //filter
     const [filter, setFilter] = useState("");
 
-    // eslint-disable-next-line no-unused-vars
+    //brand
     const [brand, setBrand] = useState("");
 
     //sort
@@ -58,7 +58,6 @@ const Products = () => {
         getProductsCount()
     }, [filter, search]);
 
-    console.log(count)
 
     //pagination
     const numberOfPages = Math.ceil(count / itemsPerPage);
@@ -74,6 +73,7 @@ const Products = () => {
         const searchValue = e.target.search.value;
         setSearch(searchValue);
     }
+
 
 
     return (
@@ -111,26 +111,44 @@ const Products = () => {
                     </ul>
                 </div> */}
 
-                <select className="select select-bordered w-full max-w-xs" onChange={e => {
-                    setSort(e.target.value);
-                    setCurrentPage(1);
-                }} value={sort}>
-                    <option disabled selected>Sort By</option>
-                    <option value={"asc"}>Sort By (Ascending)</option>
-                    <option value={"dsc"}>Sort By (Descending)</option>
-                </select>
+                <div className="flex flex-col md:flex-row gap-5">
+                    <select className="select select-bordered w-full max-w-xs" onChange={e => {
+                        setBrand(e.target.value)
+                        setCurrentPage(1);
+                    }}
+                        value={brand}
+                    >
+                        <option disabled selected>Sort By Brand</option>
+                        <option value={""}>All</option>
+                        <option value={"MSI"}>MSI</option>
+                        <option value={"Asus"}>Asus</option>
+                        <option value={"Lenovo"}>Lenovo</option>
+                    </select>
 
-                <select className="select select-bordered w-full max-w-xs" onChange={e => {
-                    setFilter(e.target.value);
-                    setCurrentPage(1);
-                }} value={filter}>
-                    <option disabled selected>Category</option>
-                    <option value={""}>Category</option>
-                    <option value={"Monitor"}>Monitor</option>
-                    <option value={"Headphone"}>Headphone</option>
-                    <option value={"Motherboard"}>Motherboard</option>
-                    <option value={"Casing"}>Casing</option>
-                </select>
+
+                    <select className="select select-bordered w-full max-w-xs" onChange={e => {
+                        setSort(e.target.value);
+                        setCurrentPage(1);
+                    }} value={sort}>
+                        <option disabled selected>Sort By</option>
+                        <option value={"dsc"}>Sort By (Descending)</option>
+                        <option value={"asc"}>Sort By (Ascending)</option>
+                    </select>
+
+                    <select className="select select-bordered w-full max-w-xs" onChange={e => {
+                        setFilter(e.target.value);
+                        setCurrentPage(1);
+                    }} value={filter}>
+                        <option disabled selected>Category</option>
+                        <option value={""}>Category</option>
+                        <option value={"Monitor"}>Monitor</option>
+                        <option value={"Headphone"}>Headphone</option>
+                        <option value={"Motherboard"}>Motherboard</option>
+                        <option value={"Casing"}>Casing</option>
+                        <option value={"Laptop"}>Laptop</option>
+                        <option value={"Mouse"}>Mouse</option>
+                    </select>
+                </div>
             </div>
 
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
